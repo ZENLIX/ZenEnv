@@ -1,0 +1,22 @@
+{
+    "name": "zenlix/zenenv",
+    "description": "A package for editing the .env file",
+    "keywords": ["dotenv", "dotenv-editor"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yaroslav Snisar",
+            "email": "info@zenlix.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZenLib\\ZenEnv\\": "/"
+        }
+    }
+}
