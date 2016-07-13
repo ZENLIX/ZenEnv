@@ -1,3 +1,6 @@
+[![License](https://poser.pugx.org/zenlix/zenenv/license)](https://packagist.org/packages/zenlix/zenenv)
+[![Total Downloads](https://poser.pugx.org/zenlix/zenenv/downloads)](https://packagist.org/packages/zenlix/zenenv)
+
 # ZenEnv
 PHP class that helps work with .env
 ----
