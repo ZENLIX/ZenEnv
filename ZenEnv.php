@@ -1,4 +1,5 @@
 <?php
+namespace ZenLib\ZenEnv;
 
 class ZenEnv
 {
