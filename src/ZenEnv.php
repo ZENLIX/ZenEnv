@@ -1,5 +1,5 @@
 <?php
-namespace ZenLib\ZenEnv;
+namespace ZenEnv;
 
 //Y.Snisar
 class ZenEnv
