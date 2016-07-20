@@ -5,6 +5,11 @@
 PHP class that helps work with .env
 ----
 
+Install
+```sh
+composer require zenlix/zenenv
+```
+
 
 Initializing ZenEnv
 ```php
