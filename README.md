@@ -10,6 +10,11 @@ Install
 composer require zenlix/zenenv
 ```
 
+Use
+```php
+use ZenEnv\ZenEnv;
+```
+
 
 Initializing ZenEnv
 ```php
