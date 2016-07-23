@@ -1,34 +1,41 @@
 <?php
+
 namespace ZenEnv;
 
-//Y.Snisar
+
+
+/**
+ * Class ZenEnv
+ * @package ZenEnv
+ */
+
 class ZenEnv
 {
     /**
-     * Env path
-     * @var mixed
+     * @var
      */
     private $env;
-    //private $autosave;
+
+
     /**
-     * @var mixed
+     * @var array
      */
     private $data;
+
     /**
      * @param $path
      */
     public function __construct($path)
     {
         $this->env = $path;
-        //$this->autosave = $autosaveFlag;
         $this->data = [];
     }
+
     /**
-     * Converting env data to array
-     * 
      * @param $file
-     * @return mixed
+     * @return array
      */
+
     protected function envToArray($file)
     {
         $string = file_get_contents(trim($file));
@@ -40,28 +47,31 @@ class ZenEnv
             $entry = explode("=", $one, 2);
             $returnArray[$entry[0]] = isset($entry[1]) ? $entry[1] : null;
         }
+
         return $returnArray;
     }
+
     /**
-     * Get env contents
-     * 
-     * @return mixed
+     * @return array|bool
+     * @throws \Exception
      */
     private function getContent()
     {
         if (is_writable($this->env)) {
             return $this->envToArray($this->env);
         } else {
-            echo "File not writable";
+            //echo "File not writable";
+            throw new \Exception("Env file not writable!", 1);
+
             return false;
         }
         //return $this->envToArray($this->env);
     }
+
     /**
-     * Change env values by variables file
-     * 
      * @param array $data
-     * @return mixed
+     * @return bool
+     * @throws \Exception
      */
     public function set($data = array())
     {
@@ -75,15 +85,16 @@ class ZenEnv
                     }
                 }
             }
+
             return $this->save($env);
         } else {
             return false;
         }
     }
+
     /**
-     * Save env contents
-     * 
      * @param $array
+     * @return bool
      */
     protected function save($array)
     {
@@ -96,24 +107,27 @@ class ZenEnv
             }
             $newArray = implode("\n", $newArray);
             file_put_contents($this->env, $newArray);
+
             return true;
         }
+
         return false;
     }
+
     /**
-     * Get envs to array
-     * 
-     * @return array
+     * @return mixed
+     * @throws \Exception
      */
     public function get()
     {
         return $this->getContent();
     }
+
+
     /**
-     * Add key/value to env
-     * 
      * @param array $data
-     * @return mixed
+     * @return bool
+     * @throws \Exception
      */
     public function add($data = array())
     {
@@ -125,15 +139,17 @@ class ZenEnv
             foreach ($data as $key => $value) {
                 $env[$key] = $value;
             }
+
             return $this->save($env);
         }
+
         return false;
     }
+
     /**
-     * Delete key/value by keys array
-     * 
      * @param array $data
-     * @return mixed
+     * @return bool
+     * @throws \Exception
      */
     public function delete($data = array())
     {
@@ -146,6 +162,7 @@ class ZenEnv
                 }
             }
         }
+
         return $this->save($env);
     }
 }
