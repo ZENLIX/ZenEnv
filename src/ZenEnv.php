@@ -6,12 +6,14 @@ namespace ZenEnv;
 
 /**
  * Class ZenEnv
+ * To help works with .env config file
  * @package ZenEnv
  */
 
 class ZenEnv
 {
     /**
+     * Path to env file
      * @var
      */
     private $env;
@@ -32,6 +34,50 @@ class ZenEnv
     }
 
     /**
+     * Setting values by params
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function set($data = array())
+    {
+        if (count($data) > 0) {
+
+            $env = $this->getContent();
+            foreach ($data as $dataKey => $dataValue) {
+                foreach ($env as $envKey => $envValue) {
+                    if ($dataKey === $envKey) {
+                        $env[$envKey] = $dataValue;
+                    }
+                }
+            }
+
+            return $this->save($env);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get content from .env file
+     * @return array|bool
+     * @throws \Exception
+     */
+    private function getContent()
+    {
+        if (is_writable($this->env)) {
+            return $this->envToArray($this->env);
+        } else {
+
+            throw new \Exception("Env file not writable!", 1);
+
+            return false;
+        }
+
+    }
+
+    /**
+     * Converting env param/values to array format
      * @param $file
      * @return array
      */
@@ -52,47 +98,7 @@ class ZenEnv
     }
 
     /**
-     * @return array|bool
-     * @throws \Exception
-     */
-    private function getContent()
-    {
-        if (is_writable($this->env)) {
-            return $this->envToArray($this->env);
-        } else {
-            //echo "File not writable";
-            throw new \Exception("Env file not writable!", 1);
-
-            return false;
-        }
-        //return $this->envToArray($this->env);
-    }
-
-    /**
-     * @param array $data
-     * @return bool
-     * @throws \Exception
-     */
-    public function set($data = array())
-    {
-        if (count($data) > 0) {
-            // $this->createBackup();
-            $env = $this->getContent();
-            foreach ($data as $dataKey => $dataValue) {
-                foreach ($env as $envKey => $envValue) {
-                    if ($dataKey === $envKey) {
-                        $env[$envKey] = $dataValue;
-                    }
-                }
-            }
-
-            return $this->save($env);
-        } else {
-            return false;
-        }
-    }
-
-    /**
+     * Saving data
      * @param $array
      * @return bool
      */
@@ -115,6 +121,7 @@ class ZenEnv
     }
 
     /**
+     * Getting param & values from .env
      * @return mixed
      * @throws \Exception
      */
@@ -125,6 +132,7 @@ class ZenEnv
 
 
     /**
+     * Add param & values to .env file
      * @param array $data
      * @return bool
      * @throws \Exception
@@ -147,6 +155,7 @@ class ZenEnv
     }
 
     /**
+     * Delete params & values by params
      * @param array $data
      * @return bool
      * @throws \Exception
