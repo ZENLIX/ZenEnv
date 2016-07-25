@@ -18,7 +18,7 @@ use ZenEnv\ZenEnv;
 
 Initializing ZenEnv
 ```php
-$env = new ZenEnv('/Users/rustem/Sites/Code/envfile.txt');
+$env = new ZenEnv('/home/rustem/web/public_html/.env');
 ```
 
 

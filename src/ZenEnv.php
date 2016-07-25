@@ -3,7 +3,6 @@
 namespace ZenEnv;
 
 
-
 /**
  * Class ZenEnv
  * To help works with .env config file
@@ -71,7 +70,7 @@ class ZenEnv
 
             throw new \Exception("Env file not writable!", 1);
 
-            return false;
+            //return false;
         }
 
     }
